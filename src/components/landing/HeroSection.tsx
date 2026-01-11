@@ -1,55 +1,100 @@
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+const slides = [
+  {
+    badge: "India's First SMB-Focused ESG Platform",
+    headline: "ESG Reporting Made Simple for",
+    highlight: "Indian SMBs",
+    subtext: "Track sustainability metrics, calculate ESG scores, and generate compliance-ready reports — without consultants.",
+    image: "dashboard",
+  },
+  {
+    badge: "BRSR & GRI Compliant",
+    headline: "Stay Ahead of",
+    highlight: "Regulatory Deadlines",
+    subtext: "Automated compliance checks ensure you're always ready for audits, investor reviews, and enterprise client demands.",
+    image: "compliance",
+  },
+  {
+    badge: "Trusted by 500+ SMBs",
+    headline: "Join the Sustainability",
+    highlight: "Revolution",
+    subtext: "Forward-thinking businesses are already using EcoTrack to win contracts, attract investors, and build brand trust.",
+    image: "growth",
+  },
+];
 
 const HeroSection = () => {
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-background">
       <div className="container-width">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-eco-green-light border border-accent/20 mb-6 animate-fade-up">
-            <span className="w-2 h-2 rounded-full bg-accent"></span>
-            <span className="text-sm font-medium text-accent">India's First SMB-Focused ESG Platform</span>
-          </div>
+        <Carousel className="w-full" opts={{ loop: true }}>
+          <CarouselContent>
+            {slides.map((slide, index) => (
+              <CarouselItem key={index}>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-eco-green-light border border-accent/20 mb-6 animate-fade-up">
+                    <span className="w-2 h-2 rounded-full bg-accent"></span>
+                    <span className="text-sm font-medium text-accent">{slide.badge}</span>
+                  </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            ESG Reporting Made Simple for{" "}
-            <span className="text-primary">Indian SMBs</span>
-          </h1>
+                  {/* Headline */}
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+                    {slide.headline}{" "}
+                    <span className="text-primary">{slide.highlight}</span>
+                  </h1>
 
-          {/* Subtext */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            Track sustainability metrics, calculate ESG scores, and generate compliance-ready reports — without consultants.
-          </p>
+                  {/* Subtext */}
+                  <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+                    {slide.subtext}
+                  </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-base font-semibold">
-              Get Early Access
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 py-6 text-base">
-              View Sample Report
-            </Button>
-          </div>
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+                    <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-base font-semibold">
+                      Get Early Access
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 py-6 text-base">
+                      View Sample Report
+                    </Button>
+                    <Button variant="ghost" size="lg" className="w-full sm:w-auto px-8 py-6 text-base text-primary">
+                      <Play className="mr-2 w-5 h-5" />
+                      Watch Demo
+                    </Button>
+                  </div>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-accent" />
-              <span>No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-accent" />
-              <span>14-day free trial</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-accent" />
-              <span>India-compliant</span>
-            </div>
-          </div>
-        </div>
+                  {/* Trust indicators */}
+                  <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground animate-fade-up" style={{ animationDelay: "0.4s" }}>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                      <span>No credit card required</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                      <span>14-day free trial</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                      <span>India-compliant</span>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-4 md:-left-12" />
+          <CarouselNext className="right-4 md:-right-12" />
+        </Carousel>
 
         {/* Dashboard Preview */}
         <div className="mt-16 relative animate-fade-up" style={{ animationDelay: "0.5s" }}>

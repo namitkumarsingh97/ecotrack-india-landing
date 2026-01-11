@@ -1,4 +1,5 @@
-import { Factory, Ship, Briefcase, Building2 } from "lucide-react";
+import { Factory, Ship, Briefcase, Building2, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const audiences = [
   {
@@ -54,6 +55,17 @@ const AudienceSection = () => {
         <p className="text-center text-lg text-muted-foreground mt-10 max-w-2xl mx-auto">
           If ESG shows up in your emails or tenders — <span className="font-semibold text-foreground">EcoTrack is for you.</span>
         </p>
+
+        {/* CTA Section */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+          <Button size="lg" className="px-8">
+            Check If You Qualify
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <Button variant="ghost" size="lg" className="px-8 text-primary">
+            Talk to Our Team
+          </Button>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
-import { BarChart3, FileText, LineChart } from "lucide-react";
+import { BarChart3, FileText, LineChart, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const steps = [
   {
@@ -49,12 +50,23 @@ const SolutionSection = () => {
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                   <step.icon className="w-8 h-8 text-primary" />
                 </div>
-                <div className="text-sm font-semibold text-primary mb-2">Step {index + 1}</div>
+            <div className="text-sm font-semibold text-primary mb-2">Step {index + 1}</div>
                 <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
                 <p className="text-muted-foreground">{step.description}</p>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          <Button size="lg" className="px-8">
+            Start Free Trial
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <Button variant="outline" size="lg" className="px-8">
+            See How It Works
+          </Button>
         </div>
       </div>
     </section>
