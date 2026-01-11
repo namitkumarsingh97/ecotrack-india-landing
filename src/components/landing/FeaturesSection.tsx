@@ -4,8 +4,10 @@ import {
   Calculator, 
   Download, 
   TrendingUp, 
-  Shield 
+  Shield,
+  ArrowRight
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -69,6 +71,14 @@ const FeaturesSection = () => {
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-12">
+          <Button size="lg" className="px-8">
+            Explore All Features
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
         </div>
       </div>
     </section>
