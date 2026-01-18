@@ -41,12 +41,9 @@ const PricingSection = () => {
               </div>
             </div>
 
-            <Button size="lg" className="w-full py-6 text-base font-semibold">
-              View All Plans
+            <Button size="lg" className="w-full py-6 text-base font-semibold" asChild>
+              <a href="/pricing">View All Plans</a>
             </Button>
-            <p className="text-sm text-muted-foreground mt-4">
-              No credit card required • Cancel anytime
-            </p>
           </div>
         </div>
       </div>

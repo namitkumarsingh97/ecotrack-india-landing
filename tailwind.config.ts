@@ -53,8 +53,7 @@ export default {
         eco: {
           green: "hsl(var(--eco-green))",
           "green-light": "hsl(var(--eco-green-light))",
-          blue: "hsl(var(--eco-blue))",
-          "blue-dark": "hsl(var(--eco-blue-dark))",
+          "green-dark": "hsl(var(--eco-green-dark))",
           navy: "hsl(var(--eco-navy))",
         },
       },

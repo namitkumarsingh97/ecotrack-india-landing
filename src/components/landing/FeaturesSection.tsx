@@ -75,9 +75,8 @@ const FeaturesSection = () => {
 
         {/* CTA Section */}
         <div className="text-center mt-12">
-          <Button size="lg" className="px-8">
-            Explore All Features
-            <ArrowRight className="ml-2 w-5 h-5" />
+          <Button size="lg" className="px-8" asChild>
+            <a href="/product">Explore All Features</a>
           </Button>
         </div>
       </div>

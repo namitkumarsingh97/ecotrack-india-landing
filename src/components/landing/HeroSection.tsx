@@ -24,10 +24,10 @@ const slides = [
     image: "compliance",
   },
   {
-    badge: "Trusted by 500+ SMBs",
+    badge: "Built for Indian SMBs",
     headline: "Join the Sustainability",
     highlight: "Revolution",
-    subtext: "Forward-thinking businesses are already using EcoTrack to win contracts, attract investors, and build brand trust.",
+    subtext: "Start your ESG compliance journey today. Win contracts, attract investors, and build brand trust with professional ESG reporting.",
     image: "growth",
   },
 ];
@@ -60,16 +60,20 @@ const HeroSection = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-                    <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-base font-semibold">
-                      Get Early Access
-                      <ArrowRight className="ml-2 w-5 h-5" />
+                    <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-base font-semibold" asChild>
+                      <a href="/contact?subject=Early%20Access%20Request" className="flex items-center">
+                        Get Early Access
+                        <ArrowRight className="ml-2 w-5 h-5" />
+                      </a>
                     </Button>
-                    <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 py-6 text-base">
-                      View Sample Report
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 py-6 text-base" asChild>
+                      <a href="mailto:ecotrackindia26@gmail.com?subject=Sample%20Report%20Request&body=Hi,%20I%20would%20like%20to%20view%20a%20sample%20ESG%20report.">View Sample Report</a>
                     </Button>
-                    <Button variant="ghost" size="lg" className="w-full sm:w-auto px-8 py-6 text-base text-primary">
-                      <Play className="mr-2 w-5 h-5" />
-                      Watch Demo
+                    <Button variant="ghost" size="lg" className="w-full sm:w-auto px-8 py-6 text-base text-primary" asChild>
+                      <a href="/contact?subject=Demo%20Request" className="flex items-center">
+                        <Play className="mr-2 w-5 h-5" />
+                        Watch Demo
+                      </a>
                     </Button>
                   </div>
 
@@ -77,23 +81,23 @@ const HeroSection = () => {
                   <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground animate-fade-up" style={{ animationDelay: "0.4s" }}>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-accent" />
-                      <span>No credit card required</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent" />
-                      <span>14-day free trial</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent" />
                       <span>India-compliant</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                      <span>BRSR & GRI aligned</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent" />
+                      <span>Enterprise-ready</span>
                     </div>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4 md:-left-12" />
-          <CarouselNext className="right-4 md:-right-12" />
+          <CarouselPrevious className="left-2 md:left-4 lg:-left-12" />
+          <CarouselNext className="right-2 md:right-4 lg:-right-12" />
         </Carousel>
 
         {/* Dashboard Preview */}
@@ -126,7 +130,7 @@ const HeroSection = () => {
                 {/* Social */}
                 <div className="bg-background rounded-lg p-6 border border-border">
                   <p className="text-sm text-muted-foreground mb-2">Social & Governance</p>
-                  <div className="text-4xl font-bold text-eco-blue mb-2">74</div>
+                  <div className="text-4xl font-bold text-primary mb-2">74</div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-[74%] bg-primary rounded-full"></div>
                   </div>

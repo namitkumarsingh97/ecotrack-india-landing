@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-    --primary: 221 83% 53%;
+    --primary: 142 71% 45%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 20% 96%;
@@ -32,15 +32,14 @@
 
     --border: 220 15% 90%;
     --input: 220 15% 90%;
-    --ring: 221 83% 53%;
+    --ring: 142 71% 45%;
 
     --radius: 0.5rem;
 
     /* Custom EcoTrack tokens */
     --eco-green: 142 71% 45%;
     --eco-green-light: 142 60% 95%;
-    --eco-blue: 221 83% 53%;
-    --eco-blue-dark: 221 83% 45%;
+    --eco-green-dark: 142 71% 35%;
     --eco-navy: 220 30% 15%;
     --hero-bg: 220 30% 96%;
     --section-alt: 220 25% 98%;
