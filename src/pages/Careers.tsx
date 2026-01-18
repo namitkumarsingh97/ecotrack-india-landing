@@ -63,67 +63,73 @@ const Careers = () => {
       title: "Business Development Manager",
       department: "Sales",
       location: "Gurugram / Remote",
-      type: "Full-time",
-      description: "We're looking for a dynamic Business Development Manager to help us grow our customer base and bring ESG compliance to more Indian SMBs.",
+      type: "Part-time / Freelance",
+      description: "We're looking for a dynamic Business Development Manager to help us grow our customer base and bring ESG compliance to more Indian SMBs. This is a part-time/freelance role perfect for someone who wants to build something meaningful while maintaining flexibility.",
       responsibilities: [
         "Identify and reach out to potential customers in target industries",
         "Build relationships with SMBs looking for ESG compliance solutions",
         "Conduct product demos and presentations",
         "Close deals and manage customer relationships",
-        "Provide feedback to improve our product based on customer needs"
+        "Provide feedback to improve our product based on customer needs",
+        "Work flexible hours (10-15 hours/week initially)"
       ],
       requirements: [
         "2-4 years of B2B sales experience, preferably in SaaS",
         "Strong communication and presentation skills",
         "Understanding of ESG/sustainability space is a plus",
         "Self-motivated and results-driven",
-        "Comfortable working in a startup environment"
+        "Comfortable working in a startup environment",
+        "Available for part-time/freelance work"
       ],
-      whyJoin: "As our first sales hire, you'll have the opportunity to shape our go-to-market strategy and directly impact our growth. You'll work closely with the founder and have significant autonomy."
+      whyJoin: "As our first sales hire, you'll have the opportunity to shape our go-to-market strategy and directly impact our growth. You'll work closely with the founder and have significant autonomy. As we grow and start generating revenue, your compensation and equity participation will grow with the company. This is a chance to be part of building something from the ground up."
     },
     {
       title: "Customer Success Specialist",
       department: "Customer Success",
       location: "Gurugram / Remote",
-      type: "Full-time",
-      description: "Help our customers succeed with ESG compliance. You'll be the bridge between our product and our customers, ensuring they get maximum value.",
+      type: "Part-time / Freelance",
+      description: "Help our customers succeed with ESG compliance. You'll be the bridge between our product and our customers, ensuring they get maximum value. This is a part-time/freelance role with flexible hours.",
       responsibilities: [
         "Onboard new customers and guide them through the platform",
         "Provide ongoing support and answer customer questions",
         "Help customers understand ESG compliance requirements",
         "Collect feedback and work with the team to improve the product",
-        "Reduce churn by ensuring customer satisfaction"
+        "Reduce churn by ensuring customer satisfaction",
+        "Work flexible hours (10-15 hours/week initially)"
       ],
       requirements: [
         "1-3 years of customer success or support experience",
         "Excellent communication skills, both written and verbal",
         "Patience and empathy when working with customers",
         "Basic understanding of ESG/sustainability concepts",
-        "Problem-solving mindset"
+        "Problem-solving mindset",
+        "Available for part-time/freelance work"
       ],
-      whyJoin: "You'll be the face of EcoTrack for our customers. This role offers the opportunity to learn about ESG compliance deeply while helping businesses succeed."
+      whyJoin: "You'll be the face of EcoTrack for our customers. This role offers the opportunity to learn about ESG compliance deeply while helping businesses succeed. As we grow and acquire more customers, your role will expand, and compensation will increase accordingly. This is a chance to build customer success processes from scratch."
     },
     {
       title: "Marketing & Content Specialist",
       department: "Marketing",
       location: "Gurugram / Remote",
-      type: "Full-time",
-      description: "Build our brand and generate leads through content marketing, SEO, and digital marketing. Help Indian SMBs discover EcoTrack.",
+      type: "Part-time / Freelance",
+      description: "Build our brand and generate leads through content marketing, SEO, and digital marketing. Help Indian SMBs discover EcoTrack. This is a part-time/freelance role perfect for content creators and marketers who want flexibility.",
       responsibilities: [
         "Create content (blog posts, guides, case studies) about ESG compliance",
         "Manage SEO and content marketing to drive organic traffic",
         "Run digital marketing campaigns (social media, email, ads)",
         "Build partnerships and collaborations",
-        "Track and analyze marketing metrics"
+        "Track and analyze marketing metrics",
+        "Work flexible hours (10-15 hours/week initially)"
       ],
       requirements: [
         "1-3 years of marketing experience, preferably in B2B SaaS",
         "Strong writing skills in English and Hindi",
         "Understanding of SEO and content marketing",
         "Creative mindset and ability to tell compelling stories",
-        "Familiarity with marketing tools (Google Analytics, social media platforms)"
+        "Familiarity with marketing tools (Google Analytics, social media platforms)",
+        "Available for part-time/freelance work"
       ],
-      whyJoin: "As our first marketing hire, you'll shape our brand voice and marketing strategy. You'll have creative freedom to experiment and see what works."
+      whyJoin: "As our first marketing hire, you'll shape our brand voice and marketing strategy. You'll have creative freedom to experiment and see what works. As we grow and start generating revenue, your compensation and role will expand. This is a chance to build a brand from the ground up and see your work directly impact business growth."
     }
   ];
 
@@ -144,7 +150,7 @@ const Careers = () => {
                 <span className="text-primary"> ESG Compliance</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Join a mission-driven startup where your work directly impacts how Indian businesses achieve sustainability. We're building something meaningful, and we need passionate people to help us grow.
+                Join a mission-driven startup where your work directly impacts how Indian businesses achieve sustainability. We're an early-stage startup looking for passionate part-time/freelance team members who want to grow with us.
               </p>
             </div>
           </div>
@@ -213,9 +219,14 @@ const Careers = () => {
                 Open Positions
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Come Build What's Next</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
                 We're looking for passionate individuals who want to make a real impact. As an early team member, you'll shape our culture and product.
               </p>
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 max-w-3xl mx-auto">
+                <p className="text-sm text-muted-foreground mb-2">
+                  <strong className="text-foreground">Note:</strong> All positions are part-time/freelance roles. We're an early-stage startup with no sales yet, so we're looking for team members who believe in our mission and want to grow with us. Compensation will be modest initially, but as the company grows, we'll grow together with equity participation and increased compensation.
+                </p>
+              </div>
             </div>
 
             <div className="max-w-4xl mx-auto space-y-6">
@@ -276,9 +287,16 @@ const Careers = () => {
                       </div>
                     </div>
 
-                    <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                    <div className="bg-primary/5 rounded-lg p-4 border border-primary/20 mb-4">
                       <h4 className="font-semibold mb-2 text-primary">Why Join This Role?</h4>
-                      <p className="text-sm text-muted-foreground">{role.whyJoin}</p>
+                      <p className="text-sm text-muted-foreground mb-3">{role.whyJoin}</p>
+                    </div>
+
+                    <div className="bg-accent/10 rounded-lg p-4 border border-accent/20">
+                      <h4 className="font-semibold mb-2 text-accent">Compensation & Growth</h4>
+                      <p className="text-sm text-muted-foreground">
+                        As an early-stage startup with no sales yet, we're offering modest compensation initially. However, as the company grows and generates revenue, we're committed to growing together. This includes increased compensation, equity participation, and expanded responsibilities. We're looking for people who believe in our mission and want to build something meaningful together.
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -302,7 +320,7 @@ const Careers = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Make an Impact?</h2>
               <p className="text-lg mb-8 opacity-90">
-                Join us in making ESG compliance accessible to every Indian SMB. Your work will directly help businesses grow sustainably.
+                Join us in making ESG compliance accessible to every Indian SMB. We're looking for passionate part-time/freelance team members who want to grow with us. As we build and scale, we'll grow together.
               </p>
               <Button size="lg" variant="secondary" className="px-8" asChild>
                 <a href="/contact?subject=Career%20Inquiry">Explore Opportunities</a>
