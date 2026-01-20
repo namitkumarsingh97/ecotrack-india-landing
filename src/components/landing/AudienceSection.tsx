@@ -1,4 +1,15 @@
-import { Factory, Ship, Briefcase, Building2, Shirt, Pill, Wheat, Laptop, FlaskConical, ArrowRight } from "lucide-react";
+import {
+  Factory,
+  Ship,
+  Briefcase,
+  Building2,
+  Shirt,
+  Pill,
+  Wheat,
+  Laptop,
+  FlaskConical,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -7,49 +18,49 @@ const industries = [
     icon: Shirt,
     title: "Textiles & Apparel",
     description: "Export compliance, water tracking, supply chain transparency",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Pill,
     title: "Pharmaceuticals",
     description: "Hazardous waste, water quality, lab safety metrics",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Wheat,
     title: "Food Processing",
     description: "Farm-to-fork traceability, organic certification support",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Laptop,
     title: "IT/Software",
     description: "E-waste management, energy consumption, diversity metrics",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Factory,
     title: "Manufacturing",
     description: "Factory compliance, energy efficiency, worker safety",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: FlaskConical,
     title: "Chemicals",
     description: "Hazardous waste, emissions tracking, CPCB compliance",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Ship,
     title: "Exporters",
     description: "International ESG requirements, CSRD compliance",
-    color: "text-primary"
+    color: "text-primary",
   },
   {
     icon: Building2,
     title: "Enterprise Suppliers",
     description: "Client ESG requirements, supply chain transparency",
-    color: "text-primary"
+    color: "text-primary",
   },
 ];
 
@@ -62,10 +73,12 @@ const AudienceSection = () => {
             Industries We Serve
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Built for Brands, <span className="text-primary">Across All Industries</span>
+            Built for Brands,{" "}
+            <span className="text-primary">Across All Industries</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Adaptable to every market, every channel, every business type. Industry-specific templates and metrics.
+            Adaptable to every market, every channel, every business type.
+            Industry-specific templates and metrics.
           </p>
         </div>
 
@@ -80,7 +93,9 @@ const AudienceSection = () => {
                   <industry.icon className={`w-8 h-8 ${industry.color}`} />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{industry.title}</h3>
-                <p className="text-muted-foreground text-sm">{industry.description}</p>
+                <p className="text-muted-foreground text-sm">
+                  {industry.description}
+                </p>
               </CardContent>
             </Card>
           ))}
@@ -88,7 +103,10 @@ const AudienceSection = () => {
 
         <div className="text-center">
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            If ESG shows up in your emails or tenders — <span className="font-semibold text-foreground">EcoTrack is for you.</span>
+            If ESG shows up in your emails or tenders -{" "}
+            <span className="font-semibold text-foreground">
+              EcoTrack is for you.
+            </span>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="px-8" asChild>

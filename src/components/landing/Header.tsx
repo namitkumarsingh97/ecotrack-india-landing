@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +27,9 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <img 
-              src="/Logo_No_BG.png" 
-              alt="EcoTrack India" 
+            <img
+              src="/Logo_No_BG.png"
+              alt="EcoTrack India"
               className="h-10 w-auto"
             />
             <span className="text-xl font-bold text-foreground hidden sm:inline-block">
@@ -52,10 +57,15 @@ const Header = () => {
               onMouseEnter={() => setOpenDropdown("product")}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <DropdownMenu open={openDropdown === "product"} onOpenChange={(open) => !open && setOpenDropdown(null)}>
+              <DropdownMenu
+                open={openDropdown === "product"}
+                onOpenChange={(open) => !open && setOpenDropdown(null)}
+              >
                 <DropdownMenuTrigger
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
-                    isActiveInPath("/product") || isActiveInPath("/industries") || isActiveInPath("/use-cases")
+                    isActiveInPath("/product") ||
+                    isActiveInPath("/industries") ||
+                    isActiveInPath("/use-cases")
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
@@ -63,7 +73,12 @@ const Header = () => {
                   Product
                   <ChevronDown className="w-4 h-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48" onMouseEnter={() => setOpenDropdown("product")} onMouseLeave={() => setOpenDropdown(null)}>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-48"
+                  onMouseEnter={() => setOpenDropdown("product")}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
                   <DropdownMenuItem asChild>
                     <Link to="/product">Product Details</Link>
                   </DropdownMenuItem>
@@ -86,10 +101,15 @@ const Header = () => {
               onMouseEnter={() => setOpenDropdown("resources")}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <DropdownMenu open={openDropdown === "resources"} onOpenChange={(open) => !open && setOpenDropdown(null)}>
+              <DropdownMenu
+                open={openDropdown === "resources"}
+                onOpenChange={(open) => !open && setOpenDropdown(null)}
+              >
                 <DropdownMenuTrigger
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
-                    isActiveInPath("/impact") || isActiveInPath("/blog")
+                    isActiveInPath("/impact") ||
+                    isActiveInPath("/blog") ||
+                    isActiveInPath("/what-is-smb")
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
@@ -97,12 +117,20 @@ const Header = () => {
                   Resources
                   <ChevronDown className="w-4 h-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48" onMouseEnter={() => setOpenDropdown("resources")} onMouseLeave={() => setOpenDropdown(null)}>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-48"
+                  onMouseEnter={() => setOpenDropdown("resources")}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
                   <DropdownMenuItem asChild>
                     <Link to="/impact">Business Impact</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/blog">Blog</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/what-is-smb">What Is SMB</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -114,7 +142,10 @@ const Header = () => {
               onMouseEnter={() => setOpenDropdown("company")}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <DropdownMenu open={openDropdown === "company"} onOpenChange={(open) => !open && setOpenDropdown(null)}>
+              <DropdownMenu
+                open={openDropdown === "company"}
+                onOpenChange={(open) => !open && setOpenDropdown(null)}
+              >
                 <DropdownMenuTrigger
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
                     isActiveInPath("/about") || isActiveInPath("/careers")
@@ -125,7 +156,12 @@ const Header = () => {
                   Company
                   <ChevronDown className="w-4 h-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48" onMouseEnter={() => setOpenDropdown("company")} onMouseLeave={() => setOpenDropdown(null)}>
+                <DropdownMenuContent
+                  align="start"
+                  className="w-48"
+                  onMouseEnter={() => setOpenDropdown("company")}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
                   <DropdownMenuItem asChild>
                     <Link to="/about">About Us</Link>
                   </DropdownMenuItem>
@@ -166,7 +202,10 @@ const Header = () => {
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[350px] overflow-y-auto">
+            <SheetContent
+              side="right"
+              className="w-[300px] sm:w-[350px] overflow-y-auto"
+            >
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-6 mt-8">
                 <nav className="flex flex-col gap-1">
@@ -180,7 +219,7 @@ const Header = () => {
                   >
                     Home
                   </Link>
-                  
+
                   <div className="px-3 py-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                     Product
                   </div>
@@ -247,6 +286,16 @@ const Header = () => {
                     }`}
                   >
                     Blog
+                  </Link>
+                  <Link
+                    to="/what-is-smb"
+                    className={`px-6 py-2 rounded-md text-base transition-colors ${
+                      isActive("/what-is-smb")
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                    }`}
+                  >
+                    What Is SMB
                   </Link>
 
                   <div className="px-3 py-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide mt-4">

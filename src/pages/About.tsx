@@ -176,7 +176,7 @@ const About = () => {
                     To become India's leading ESG platform, helping thousands of
                     SMBs achieve sustainability compliance. We envision a future
                     where every Indian business can easily track, measure, and
-                    improve their environmental and social impact—without
+                    improve their environmental and social impact-without
                     needing expensive consultants or complex systems.
                   </p>
                 </CardContent>
@@ -248,7 +248,7 @@ const About = () => {
                     <p className="text-muted-foreground">
                       We understand Indian regulations inside out. Our platform
                       is built for BRSR, CPCB, Factory Act, and other Indian
-                      compliance requirements—not adapted from global solutions.
+                      compliance requirements-not adapted from global solutions.
                     </p>
                   </div>
                 </div>
@@ -264,7 +264,7 @@ const About = () => {
                     <p className="text-muted-foreground">
                       Starting at just ₹1,999/month, we're 95% cheaper than
                       Big-4 consultants. No hidden fees, no surprise
-                      charges—just transparent, affordable pricing.
+                      charges-just transparent, affordable pricing.
                     </p>
                   </div>
                 </div>

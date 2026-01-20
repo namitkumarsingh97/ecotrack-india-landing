@@ -34,12 +34,14 @@ const ProblemSection = () => {
                   <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center flex-shrink-0">
                     <problem.icon className="w-5 h-5 text-destructive" />
                   </div>
-                  <p className="text-lg text-muted-foreground pt-2">{problem.text}</p>
+                  <p className="text-lg text-muted-foreground pt-2">
+                    {problem.text}
+                  </p>
                 </div>
               ))}
             </div>
             <p className="text-lg font-semibold text-foreground border-l-4 border-destructive pl-4">
-              Most Indian SMBs are unprepared — and losing opportunities.
+              Most Indian SMBs are unprepared - and losing opportunities.
             </p>
           </div>
 
@@ -49,19 +51,27 @@ const ProblemSection = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 p-4 bg-destructive/5 rounded-lg border border-destructive/20">
                   <X className="w-5 h-5 text-destructive" />
-                  <span className="text-muted-foreground">Spreadsheet chaos</span>
+                  <span className="text-muted-foreground">
+                    Spreadsheet chaos
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-destructive/5 rounded-lg border border-destructive/20">
                   <X className="w-5 h-5 text-destructive" />
-                  <span className="text-muted-foreground">Manual data collection</span>
+                  <span className="text-muted-foreground">
+                    Manual data collection
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-destructive/5 rounded-lg border border-destructive/20">
                   <X className="w-5 h-5 text-destructive" />
-                  <span className="text-muted-foreground">Inconsistent reporting</span>
+                  <span className="text-muted-foreground">
+                    Inconsistent reporting
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-destructive/5 rounded-lg border border-destructive/20">
                   <X className="w-5 h-5 text-destructive" />
-                  <span className="text-muted-foreground">Missed compliance deadlines</span>
+                  <span className="text-muted-foreground">
+                    Missed compliance deadlines
+                  </span>
                 </div>
               </div>
             </div>

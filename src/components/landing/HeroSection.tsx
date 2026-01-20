@@ -13,21 +13,24 @@ const slides = [
     badge: "India's First SMB-Focused ESG Platform",
     headline: "ESG Reporting Made Simple for",
     highlight: "Indian SMBs",
-    subtext: "Track sustainability metrics, calculate ESG scores, and generate compliance-ready reports — without consultants.",
+    subtext:
+      "Track sustainability metrics, calculate ESG scores, and generate compliance-ready reports - without consultants.",
     image: "dashboard",
   },
   {
     badge: "BRSR & GRI Compliant",
     headline: "Stay Ahead of",
     highlight: "Regulatory Deadlines",
-    subtext: "Automated compliance checks ensure you're always ready for audits, investor reviews, and enterprise client demands.",
+    subtext:
+      "Automated compliance checks ensure you're always ready for audits, investor reviews, and enterprise client demands.",
     image: "compliance",
   },
   {
     badge: "Built for Indian SMBs",
     headline: "Join the Sustainability",
     highlight: "Revolution",
-    subtext: "Start your ESG compliance journey today. Win contracts, attract investors, and build brand trust with professional ESG reporting.",
+    subtext:
+      "Start your ESG compliance journey today. Win contracts, attract investors, and build brand trust with professional ESG reporting.",
     image: "growth",
   },
 ];
@@ -44,33 +47,66 @@ const HeroSection = () => {
                   {/* Badge */}
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-eco-green-light border border-accent/20 mb-6 animate-fade-up">
                     <span className="w-2 h-2 rounded-full bg-accent"></span>
-                    <span className="text-sm font-medium text-accent">{slide.badge}</span>
+                    <span className="text-sm font-medium text-accent">
+                      {slide.badge}
+                    </span>
                   </div>
 
                   {/* Headline */}
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+                  <h1
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up"
+                    style={{ animationDelay: "0.1s" }}
+                  >
                     {slide.headline}{" "}
                     <span className="text-primary">{slide.highlight}</span>
                   </h1>
 
                   {/* Subtext */}
-                  <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+                  <p
+                    className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-up"
+                    style={{ animationDelay: "0.2s" }}
+                  >
                     {slide.subtext}
                   </p>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-                    <Button size="lg" className="w-full sm:w-auto px-8 py-6 text-base font-semibold" asChild>
-                      <a href="/contact?subject=Early%20Access%20Request" className="flex items-center">
+                  <div
+                    className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up"
+                    style={{ animationDelay: "0.3s" }}
+                  >
+                    <Button
+                      size="lg"
+                      className="w-full sm:w-auto px-8 py-6 text-base font-semibold"
+                      asChild
+                    >
+                      <a
+                        href="/contact?subject=Early%20Access%20Request"
+                        className="flex items-center"
+                      >
                         Get Early Access
                         <ArrowRight className="ml-2 w-5 h-5" />
                       </a>
                     </Button>
-                    <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 py-6 text-base" asChild>
-                      <a href="mailto:ecotrackindia26@gmail.com?subject=Sample%20Report%20Request&body=Hi,%20I%20would%20like%20to%20view%20a%20sample%20ESG%20report.">View Sample Report</a>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="w-full sm:w-auto px-8 py-6 text-base"
+                      asChild
+                    >
+                      <a href="mailto:ecotrackindia26@gmail.com?subject=Sample%20Report%20Request&body=Hi,%20I%20would%20like%20to%20view%20a%20sample%20ESG%20report.">
+                        View Sample Report
+                      </a>
                     </Button>
-                    <Button variant="ghost" size="lg" className="w-full sm:w-auto px-8 py-6 text-base text-primary" asChild>
-                      <a href="/contact?subject=Demo%20Request" className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="lg"
+                      className="w-full sm:w-auto px-8 py-6 text-base text-primary"
+                      asChild
+                    >
+                      <a
+                        href="/contact?subject=Demo%20Request"
+                        className="flex items-center"
+                      >
                         <Play className="mr-2 w-5 h-5" />
                         Watch Demo
                       </a>
@@ -78,7 +114,10 @@ const HeroSection = () => {
                   </div>
 
                   {/* Trust indicators */}
-                  <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground animate-fade-up" style={{ animationDelay: "0.4s" }}>
+                  <div
+                    className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground animate-fade-up"
+                    style={{ animationDelay: "0.4s" }}
+                  >
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-accent" />
                       <span>India-compliant</span>
@@ -101,7 +140,10 @@ const HeroSection = () => {
         </Carousel>
 
         {/* Dashboard Preview */}
-        <div className="mt-16 relative animate-fade-up" style={{ animationDelay: "0.5s" }}>
+        <div
+          className="mt-16 relative animate-fade-up"
+          style={{ animationDelay: "0.5s" }}
+        >
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none"></div>
           <div className="bg-card rounded-xl shadow-2xl border border-border overflow-hidden max-w-5xl mx-auto">
             <div className="bg-muted px-4 py-3 flex items-center gap-2 border-b border-border">
@@ -113,7 +155,9 @@ const HeroSection = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* ESG Score Card */}
                 <div className="bg-background rounded-lg p-6 border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Overall ESG Score</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Overall ESG Score
+                  </p>
                   <div className="text-4xl font-bold text-primary mb-2">78</div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-[78%] bg-primary rounded-full"></div>
@@ -121,7 +165,9 @@ const HeroSection = () => {
                 </div>
                 {/* Environmental */}
                 <div className="bg-background rounded-lg p-6 border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Environmental</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Environmental
+                  </p>
                   <div className="text-4xl font-bold text-accent mb-2">82</div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-[82%] bg-accent rounded-full"></div>
@@ -129,7 +175,9 @@ const HeroSection = () => {
                 </div>
                 {/* Social */}
                 <div className="bg-background rounded-lg p-6 border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Social & Governance</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Social & Governance
+                  </p>
                   <div className="text-4xl font-bold text-primary mb-2">74</div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-[74%] bg-primary rounded-full"></div>
