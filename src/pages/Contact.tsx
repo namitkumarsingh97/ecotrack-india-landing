@@ -1,17 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import { Mail, MessageSquare, Send, Clock, MapPin } from "lucide-react";
+import { Mail, MessageSquare, Send, Clock, MapPin, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const [subject, setSubject] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  // EmailJS configuration - Replace these with your EmailJS credentials
+  // Get these from https://www.emailjs.com/
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 
   useEffect(() => {
     const subjectParam = searchParams.get("subject");
@@ -19,6 +36,80 @@ const Contact = () => {
       setSubject(decodeURIComponent(subjectParam));
     }
   }, [searchParams]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    if (id === "subject") {
+      setSubject(value);
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [id]: value
+      }));
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name || !formData.email || !subject || !formData.message) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company || "Not provided",
+        phone: formData.phone || "Not provided",
+        subject: subject,
+        message: formData.message,
+        to_email: "ecotrackindia26@gmail.com"
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      // Success notification
+      toast({
+        title: "Message Sent Successfully!",
+        description: "We'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: ""
+      });
+      setSubject("");
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast({
+        title: "Failed to Send Message",
+        description: "Please try again or email us directly at ecotrackindia26@gmail.com",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const contactInfo = [
     {
       icon: Mail,
@@ -103,7 +194,7 @@ const Contact = () => {
               <Card className="border-2">
                 <CardContent className="pt-8">
                   <h2 className="text-2xl font-bold mb-6 text-center">Send Us a Message</h2>
-                  <form className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name *</Label>
@@ -111,7 +202,10 @@ const Contact = () => {
                           id="name"
                           type="text"
                           placeholder="Your name"
+                          value={formData.name}
+                          onChange={handleInputChange}
                           required
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="space-y-2">
@@ -120,7 +214,10 @@ const Contact = () => {
                           id="email"
                           type="email"
                           placeholder="your.email@company.com"
+                          value={formData.email}
+                          onChange={handleInputChange}
                           required
+                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -132,6 +229,9 @@ const Contact = () => {
                           id="company"
                           type="text"
                           placeholder="Your company"
+                          value={formData.company}
+                          onChange={handleInputChange}
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="space-y-2">
@@ -140,6 +240,9 @@ const Contact = () => {
                           id="phone"
                           type="tel"
                           placeholder="+91 XXXXX XXXXX"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -151,8 +254,9 @@ const Contact = () => {
                         type="text"
                         placeholder="What is this regarding?"
                         value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
+                        onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -162,7 +266,10 @@ const Contact = () => {
                         id="message"
                         placeholder="Tell us more about your requirements..."
                         rows={6}
+                        value={formData.message}
+                        onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -170,13 +277,19 @@ const Contact = () => {
                       type="submit"
                       size="lg"
                       className="w-full"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = `mailto:ecotrackindia26@gmail.com?subject=${encodeURIComponent((document.getElementById('subject') as HTMLInputElement)?.value || 'Contact from Website')}&body=${encodeURIComponent((document.getElementById('message') as HTMLTextAreaElement)?.value || '')}`;
-                      }}
+                      disabled={isSubmitting}
                     >
-                      <Send className="mr-2 w-5 h-5" />
-                      Send Message
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 w-5 h-5" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
 
                     <p className="text-sm text-center text-muted-foreground">
