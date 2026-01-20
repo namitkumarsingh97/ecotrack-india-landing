@@ -1,76 +1,49 @@
+import { useState, useMemo } from "react";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import { Calendar, Clock, ArrowRight, FileText, TrendingUp, Shield } from "lucide-react";
+import { Calendar, Clock, ArrowRight, FileText, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { blogPostsData } from "@/data/blogPosts";
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      category: "ESG Compliance",
-      title: "Understanding BRSR: A Complete Guide for Indian SMBs",
-      excerpt: "Learn everything you need to know about Business Responsibility and Sustainability Reporting (BRSR) and how it affects your business.",
-      author: "EcoTrack Team",
-      date: "2024-12-15",
-      readTime: "8 min read",
-      image: "brsr"
-    },
-    {
-      category: "Industry Insights",
-      title: "ESG Compliance for Textile Exporters: Meeting EU CSRD Requirements",
-      excerpt: "How Indian textile exporters can meet European Union's Corporate Sustainability Reporting Directive (CSRD) requirements.",
-      author: "EcoTrack Team",
-      date: "2024-12-10",
-      readTime: "6 min read",
-      image: "textiles"
-    },
-    {
-      category: "Best Practices",
-      title: "5 Ways to Improve Your ESG Score Without Breaking the Bank",
-      excerpt: "Practical, cost-effective strategies to improve your Environmental, Social, and Governance score and attract more business.",
-      author: "EcoTrack Team",
-      date: "2024-12-05",
-      readTime: "5 min read",
-      image: "improvement"
-    },
-    {
-      category: "Compliance",
-      title: "CPCB Compliance Checklist: What Every Manufacturing SMB Needs to Know",
-      excerpt: "A comprehensive checklist for Central Pollution Control Board (CPCB) compliance requirements for Indian manufacturers.",
-      author: "EcoTrack Team",
-      date: "2024-11-28",
-      readTime: "7 min read",
-      image: "cpcb"
-    },
-    {
-      category: "Industry Insights",
-      title: "Why IT Companies Need ESG Reporting: Beyond Greenwashing",
-      excerpt: "How IT and software companies can use ESG reporting to attract global clients and improve their competitive position.",
-      author: "EcoTrack Team",
-      date: "2024-11-20",
-      readTime: "6 min read",
-      image: "it"
-    },
-    {
-      category: "Case Studies",
-      title: "How ESG Compliance Helped a Food Processing Company Win ₹50 Cr Export Contract",
-      excerpt: "Real-world example of how proper ESG reporting opened doors to lucrative export opportunities.",
-      author: "EcoTrack Team",
-      date: "2024-11-15",
-      readTime: "5 min read",
-      image: "case-study"
-    }
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const postsPerPage = 6;
 
-  const categories = [
-    { name: "All", count: blogPosts.length },
-    { name: "ESG Compliance", count: 1 },
-    { name: "Industry Insights", count: 2 },
-    { name: "Best Practices", count: 1 },
-    { name: "Compliance", count: 1 },
-    { name: "Case Studies", count: 1 }
-  ];
+  // Filter posts by category
+  const filteredPosts = useMemo(() => {
+    if (selectedCategory === "All") {
+      return blogPostsData;
+    }
+    return blogPostsData.filter(post => post.category === selectedCategory);
+  }, [selectedCategory]);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+
+  // Update page when category changes
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  // Calculate category counts
+  const categories = useMemo(() => {
+    const categoryCounts: { [key: string]: number } = {};
+    blogPostsData.forEach(post => {
+      categoryCounts[post.category] = (categoryCounts[post.category] || 0) + 1;
+    });
+    
+    return [
+      { name: "All", count: blogPostsData.length },
+      ...Object.entries(categoryCounts).map(([name, count]) => ({ name, count }))
+    ];
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -102,8 +75,9 @@ const Blog = () => {
               {categories.map((category, index) => (
                 <Button
                   key={index}
-                  variant={index === 0 ? "default" : "outline"}
+                  variant={selectedCategory === category.name ? "default" : "outline"}
                   className="rounded-full"
+                  onClick={() => handleCategoryChange(category.name)}
                 >
                   {category.name} ({category.count})
                 </Button>
@@ -112,43 +86,107 @@ const Blog = () => {
 
             {/* Blog Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post, index) => (
-                <Card key={index} className="border-2 hover:border-primary/30 transition-all group cursor-pointer">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-t-lg flex items-center justify-center">
-                    <FileText className="w-16 h-16 text-primary/30" />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-primary uppercase tracking-wide">
-                        {post.category}
-                      </span>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Clock className="w-3 h-3" />
-                        {post.readTime}
-                      </div>
+              {currentPosts.map((post, index) => (
+                <Card key={index} className="border-2 hover:border-primary/30 transition-all group">
+                  <Link to={`/blog/${post.slug}`} className="block">
+                    <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-t-lg flex items-center justify-center">
+                      <FileText className="w-16 h-16 text-primary/30" />
                     </div>
-                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Calendar className="w-3 h-3" />
-                        {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                          {post.category}
+                        </span>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </div>
                       </div>
-                      <Button variant="ghost" size="sm" className="text-primary">
-                        Read More
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
+                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h3>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </div>
+                        <Button variant="ghost" size="sm" className="text-primary" asChild>
+                          <span>
+                            Read More
+                            <ArrowRight className="ml-2 w-4 h-4 inline" />
+                          </span>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Link>
                 </Card>
               ))}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex items-center justify-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="gap-2"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </Button>
+                
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    // Show first page, last page, current page, and pages around current
+                    if (
+                      page === 1 ||
+                      page === totalPages ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <Button
+                          key={page}
+                          variant={currentPage === page ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => setCurrentPage(page)}
+                          className="min-w-[40px]"
+                        >
+                          {page}
+                        </Button>
+                      );
+                    } else if (
+                      page === currentPage - 2 ||
+                      page === currentPage + 2
+                    ) {
+                      return (
+                        <span key={page} className="px-2 text-muted-foreground">
+                          ...
+                        </span>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="gap-2"
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
 
             {/* Newsletter CTA */}
             <div className="mt-16 text-center">
