@@ -32,7 +32,7 @@ const CTASection = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="px-8 py-6 text-base font-semibold border-2 border-background text-background hover:bg-background/10"
+              className="px-8 py-6 text-base font-semibold border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 bg-background/10"
               asChild
             >
               <a href="/contact">Start Free Trial</a>
