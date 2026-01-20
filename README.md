@@ -98,4 +98,4 @@ This project can be deployed to any static hosting service:
 
 ## License
 
-Copyright © 2024 EcoTrack India. All rights reserved.
+Copyright © 2026 EcoTrack India. All rights reserved.
