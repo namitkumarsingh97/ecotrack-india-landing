@@ -1,5 +1,5 @@
 # robots.txt for EcoTrack India
-# https://www.ecotrackindia.com/robots.txt
+# https://ecotrack-india.vercel.app/robots.txt
 
 # Allow all search engines to crawl the site
 User-agent: *
