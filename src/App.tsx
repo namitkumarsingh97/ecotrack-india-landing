@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,8 +22,41 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+const App = () => {
+  useEffect(() => {
+    if ((window as any).chatbase) return;
+
+    (function () {
+      if (
+        !(window as any).chatbase ||
+        (window as any).chatbase("getState") !== "initialized"
+      ) {
+        (window as any).chatbase = (...args: any[]) => {
+          if (!(window as any).chatbase.q) {
+            (window as any).chatbase.q = [];
+          }
+          (window as any).chatbase.q.push(args);
+        };
+
+        (window as any).chatbase = new Proxy((window as any).chatbase, {
+          get(target, prop) {
+            if (prop === "q") {
+              return target.q;
+            }
+            return (...args: any[]) => target(prop, ...args);
+          },
+        });
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://www.chatbase.co/embed.min.js";
+      script.id = import.meta.env.VITE_CHATBOT_ID;
+      script.setAttribute("domain", "www.chatbase.co");
+      document.body.appendChild(script);
+    })();
+  }, []);
+
+  return <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -46,7 +80,7 @@ const App = () => (
         <Analytics />
       </BrowserRouter>
     </TooltipProvider>
-  </QueryClientProvider>
-);
+  </QueryClientProvider>;
+};
 
 export default App;
