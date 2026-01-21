@@ -48,39 +48,59 @@ const App = () => {
         });
       }
 
-      const script = document.createElement("script");
-      script.src = "https://www.chatbase.co/embed.min.js";
-      script.id = import.meta.env.VITE_CHATBOT_ID;
-      script.setAttribute("domain", "www.chatbase.co");
-      document.body.appendChild(script);
+      const onLoad = () => {
+        const chatbotId = import.meta.env.VITE_CHATBOT_ID as string | undefined;
+        if (!chatbotId) {
+          console.warn(
+            "[Chatbase] Missing VITE_CHATBOT_ID. Add it to .env.local and restart the dev server.",
+          );
+          return;
+        }
+
+        if (document.getElementById(chatbotId)) return;
+
+        const script = document.createElement("script");
+        script.src = "https://www.chatbase.co/embed.min.js";
+        script.id = chatbotId;
+        script.setAttribute("domain", "www.chatbase.co");
+        document.body.appendChild(script);
+      };
+
+      if (document.readyState === "complete") {
+        onLoad();
+      } else {
+        window.addEventListener("load", onLoad, { once: true });
+      }
     })();
   }, []);
 
-  return <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/industries" element={<Industries />} />
-          <Route path="/impact" element={<Impact />} />
-          <Route path="/use-cases" element={<UseCases />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/what-is-smb" element={<WhatIsSMB />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Analytics />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/impact" element={<Impact />} />
+            <Route path="/use-cases" element={<UseCases />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/what-is-smb" element={<WhatIsSMB />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Analytics />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default App;
