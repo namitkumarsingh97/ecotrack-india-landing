@@ -26,7 +26,8 @@ const Pricing = () => {
         "No API access",
         "Standard support only"
       ],
-      cta: "Start Free Trial"
+      cta: "Get Started",
+      trialInfo: "No trial - Low price to get started immediately"
     },
     {
       name: "Pro",
@@ -47,7 +48,8 @@ const Pricing = () => {
         "Training & onboarding support"
       ],
       limitations: [],
-      cta: "Start Free Trial"
+      cta: "Start Free Trial",
+      trialInfo: "7-14 day free trial available"
     },
     {
       name: "Enterprise",
@@ -68,14 +70,15 @@ const Pricing = () => {
         "Custom SLA guarantees"
       ],
       limitations: [],
-      cta: "Contact Sales"
+      cta: "Schedule Demo",
+      trialInfo: "Demo only - Custom pricing available"
     }
   ];
 
   const faq = [
     {
       question: "Is there a free trial?",
-      answer: "Yes! Contact us to learn more about our platform and see how it works for your business. We can provide a demo and answer any questions you have."
+      answer: "Yes! Our Pro plan includes a 7-14 day free trial so you can explore all features before committing. The Starter plan has no trial but offers a low price to get started immediately. Enterprise plans include a personalized demo to see how EcoTrack can work for your organization. Contact us to get started!"
     },
     {
       question: "Can I change plans later?",
@@ -172,10 +175,10 @@ const Pricing = () => {
                       variant={plan.popular ? "default" : "outline"}
                       asChild
                     >
-                      <a href="/contact">{plan.cta}</a>
+                      <a href={plan.name === "Enterprise" ? "/contact?subject=Demo%20Request" : "/contact"}>{plan.cta}</a>
                     </Button>
                     <p className="text-xs text-center text-muted-foreground mt-4">
-                      {plan.name === "Enterprise" ? "Custom pricing" : "Contact us for details"}
+                      {plan.trialInfo}
                     </p>
                   </CardContent>
                 </Card>

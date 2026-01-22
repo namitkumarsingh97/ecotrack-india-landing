@@ -7,168 +7,91 @@
   <!-- Homepage -->
   <url>
     <loc>https://ecotrack-india.vercel.app/</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
   
   <!-- Main Pages -->
   <url>
     <loc>https://ecotrack-india.vercel.app/about</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/product</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/industries</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/impact</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/use-cases</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/pricing</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/contact</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   
   <!-- Resources Pages -->
   <url>
     <loc>https://ecotrack-india.vercel.app/blog</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/what-is-smb</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   
   <!-- Blog Posts -->
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/understanding-brsr-complete-guide-indian-smbs</loc>
-    <lastmod>2026-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/esg-compliance-textile-exporters-eu-csrd-requirements</loc>
-    <lastmod>2025-12-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/5-ways-improve-esg-score-without-breaking-bank</loc>
-    <lastmod>2025-12-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/cpcb-compliance-checklist-manufacturing-smbs</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/why-it-companies-need-esg-reporting-beyond-greenwashing</loc>
-    <lastmod>2025-11-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/how-esg-compliance-helped-food-processing-company-win-50cr-export-contract</loc>
-    <lastmod>2025-11-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/carbon-footprint-tracking-essential-for-indian-exporters</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/gri-standards-vs-brsr-what-indian-companies-need-to-know</loc>
-    <lastmod>2026-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ecotrack-india.vercel.app/blog/supply-chain-esg-compliance-competitive-advantage</loc>
-    <lastmod>2026-01-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/water-management-compliance-indian-manufacturers</loc>
-    <lastmod>2026-02-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/water-management-compliance-indian-manufacturers</loc></url>
   
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/esg-reporting-automation-tools-indian-smbs</loc>
-    <lastmod>2026-02-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/esg-reporting-automation-tools-indian-smbs</loc></url>
   
   <!-- Company Pages -->
-  <url>
-    <loc>https://ecotrack-india.vercel.app/careers</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/careers</loc></url>
   
-  <url>
-    <loc>https://ecotrack-india.vercel.app/privacy-policy</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/privacy-policy</loc></url>
   
 </urlset>
 

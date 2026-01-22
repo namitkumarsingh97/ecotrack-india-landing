@@ -55,7 +55,7 @@ const faqs = [
   {
     question: "Can I try EcoTrack before committing?",
     answer:
-      "Yes! Contact us to learn more about our platform and see how it works for your business. We can provide a demo and answer any questions you have.",
+      "Yes! Our Pro plan includes a 7-14 day free trial so you can explore all features before committing. The Starter plan has no trial but offers a low price (₹1,999/month) to get started immediately. Enterprise plans include a personalized demo to see how EcoTrack can work for your organization. Contact us to get started!",
   },
 ];
 
