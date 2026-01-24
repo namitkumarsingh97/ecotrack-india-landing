@@ -1,97 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <!-- Homepage -->
-  <url>
-    <loc>https://ecotrack-india.vercel.app/</loc>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/</loc></url>
   
   <!-- Main Pages -->
-  <url>
-    <loc>https://ecotrack-india.vercel.app/about</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/product</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/industries</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/impact</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/use-cases</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/pricing</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/contact</loc>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/about</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/product</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/industries</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/impact</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/use-cases</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/pricing</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/contact</loc></url>
   
   <!-- Resources Pages -->
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/what-is-smb</loc>
-  </url>
+  <url><loc>https://ecotrack-india.vercel.app/blog</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/what-is-smb</loc></url>
   
   <!-- Blog Posts -->
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/understanding-brsr-complete-guide-indian-smbs</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/esg-compliance-textile-exporters-eu-csrd-requirements</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/5-ways-improve-esg-score-without-breaking-bank</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/cpcb-compliance-checklist-manufacturing-smbs</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/why-it-companies-need-esg-reporting-beyond-greenwashing</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/how-esg-compliance-helped-food-processing-company-win-50cr-export-contract</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/carbon-footprint-tracking-essential-for-indian-exporters</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/gri-standards-vs-brsr-what-indian-companies-need-to-know</loc>
-  </url>
-  
-  <url>
-    <loc>https://ecotrack-india.vercel.app/blog/supply-chain-esg-compliance-competitive-advantage</loc>
-  </url>
-  
+  <url><loc>https://ecotrack-india.vercel.app/blog/understanding-brsr-complete-guide-indian-smbs</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/esg-compliance-textile-exporters-eu-csrd-requirements</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/5-ways-improve-esg-score-without-breaking-bank</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/cpcb-compliance-checklist-manufacturing-smbs</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/why-it-companies-need-esg-reporting-beyond-greenwashing</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/how-esg-compliance-helped-food-processing-company-win-50cr-export-contract</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/carbon-footprint-tracking-essential-for-indian-exporters</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/gri-standards-vs-brsr-what-indian-companies-need-to-know</loc></url>
+  <url><loc>https://ecotrack-india.vercel.app/blog/supply-chain-esg-compliance-competitive-advantage</loc></url>
   <url><loc>https://ecotrack-india.vercel.app/blog/water-management-compliance-indian-manufacturers</loc></url>
-  
   <url><loc>https://ecotrack-india.vercel.app/blog/esg-reporting-automation-tools-indian-smbs</loc></url>
   
   <!-- Company Pages -->
   <url><loc>https://ecotrack-india.vercel.app/careers</loc></url>
-  
   <url><loc>https://ecotrack-india.vercel.app/privacy-policy</loc></url>
-  
 </urlset>
 
