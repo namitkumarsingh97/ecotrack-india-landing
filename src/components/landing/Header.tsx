@@ -30,10 +30,10 @@ const Header = () => {
             <img
               src="/Logo_No_BG.png"
               alt="EcoTrack India"
-              className="h-10 w-auto"
+              className="h-12 w-auto"
             />
-            <span className="text-xl font-bold text-foreground hidden sm:inline-block">
-              EcoTrack India
+            <span className="text-xl font-bold text-foreground text-[#21c45d] hidden sm:inline-block">
+              Eco<span className="text-[#295872]">Track</span> India
             </span>
           </Link>
 

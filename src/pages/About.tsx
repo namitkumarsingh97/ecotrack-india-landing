@@ -59,7 +59,7 @@ const About = () => {
                 <img
                   src="/Logo_No_BG.png"
                   alt="EcoTrack India"
-                  className="h-5 w-auto"
+                  className="h-12 w-auto"
                 />
                 <span className="text-sm font-medium text-accent">
                   About EcoTrack India
