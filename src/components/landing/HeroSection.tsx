@@ -54,7 +54,7 @@ const HeroSection = () => {
 
                   {/* Headline */}
                   <h1
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up"
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up text-[#295872]"
                     style={{ animationDelay: "0.1s" }}
                   >
                     {slide.headline}{" "}
