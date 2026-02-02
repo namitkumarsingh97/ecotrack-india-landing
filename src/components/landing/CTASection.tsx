@@ -32,7 +32,7 @@ const CTASection = () => {
               className="px-8 py-6 text-base font-semibold shadow-lg hover:shadow-xl transition-shadow"
               asChild
             >
-              <a href="/contact">Schedule Your Demo</a>
+              <a href="/demo">Try Interactive Demo</a>
             </Button>
             <Button
               size="lg"

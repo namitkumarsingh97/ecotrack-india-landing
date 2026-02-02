@@ -18,6 +18,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Careers from "./pages/Careers";
 import WhatIsSMB from "./pages/WhatIsSMB";
+import Demo from "./pages/Demo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -94,6 +95,7 @@ const App = () => {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/what-is-smb" element={<WhatIsSMB />} />
+            <Route path="/demo" element={<Demo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Analytics />

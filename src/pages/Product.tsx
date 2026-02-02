@@ -168,7 +168,7 @@ const Product = () => {
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" className="px-8" asChild>
-                  <a href="/contact?subject=Demo%20Request">View Demo</a>
+                  <a href="/demo">View Demo</a>
                 </Button>
               </div>
             </div>

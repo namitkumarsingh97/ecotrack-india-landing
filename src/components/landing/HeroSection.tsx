@@ -104,7 +104,7 @@ const HeroSection = () => {
                       asChild
                     >
                       <a
-                        href="/contact?subject=Demo%20Request"
+                        href="/demo"
                         className="flex items-center"
                       >
                         <Play className="mr-2 w-5 h-5" />
