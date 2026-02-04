@@ -7,6 +7,26 @@ import { Button } from "@/components/ui/button";
 const Pricing = () => {
   const plans = [
     {
+      name: "Explorer",
+      price: "Free",
+      period: "",
+      description: "Try our interactive demo and explore ESG reporting capabilities",
+      popular: false,
+      features: [
+        "Interactive ESG demo",
+        "SEBI BRSR-aligned parameters",
+        "Real-time score calculation",
+        "Sample report generation",
+        "Download demo reports",
+        "No credit card required",
+        "Full feature preview"
+      ],
+      limitations: [],
+      cta: "Try Demo",
+      trialInfo: "Free demo - No signup required",
+      link: "/demo"
+    },
+    {
       name: "Starter",
       price: "₹1,999",
       period: "month",
@@ -27,7 +47,8 @@ const Pricing = () => {
         "Standard support only"
       ],
       cta: "Get Started",
-      trialInfo: "No trial - Low price to get started immediately"
+      trialInfo: "No trial - Low price to get started immediately",
+      link: "/contact"
     },
     {
       name: "Pro",
@@ -49,7 +70,8 @@ const Pricing = () => {
       ],
       limitations: [],
       cta: "Start Free Trial",
-      trialInfo: "7-14 day free trial available"
+      trialInfo: "7-14 day free trial available",
+      link: "/contact"
     },
     {
       name: "Enterprise",
@@ -71,7 +93,8 @@ const Pricing = () => {
       ],
       limitations: [],
       cta: "Schedule Demo",
-      trialInfo: "Demo only - Custom pricing available"
+      trialInfo: "Demo only - Custom pricing available",
+      link: "/contact?subject=Demo%20Request"
     }
   ];
 
@@ -124,7 +147,7 @@ const Pricing = () => {
         {/* Pricing Cards */}
         <section className="section-padding bg-background">
           <div className="container-width">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
               {plans.map((plan, index) => (
                 <Card
                   key={index}
@@ -172,10 +195,10 @@ const Pricing = () => {
                     <Button
                       size="lg"
                       className="w-full"
-                      variant={plan.popular ? "default" : "outline"}
+                      variant={plan.popular ? "default" : plan.name === "Explorer" ? "default" : "outline"}
                       asChild
                     >
-                      <a href={plan.name === "Enterprise" ? "/contact?subject=Demo%20Request" : "/contact"}>{plan.cta}</a>
+                      <a href={plan.link || "/contact"}>{plan.cta}</a>
                     </Button>
                     <p className="text-xs text-center text-muted-foreground mt-4">
                       {plan.trialInfo}
@@ -202,6 +225,7 @@ const Pricing = () => {
                 <thead>
                   <tr className="border-b-2 border-border">
                     <th className="text-left py-4 px-4 font-semibold">Features</th>
+                    <th className="text-center py-4 px-4 font-semibold">Explorer</th>
                     <th className="text-center py-4 px-4 font-semibold">Starter</th>
                     <th className="text-center py-4 px-4 font-semibold bg-primary/5">Pro</th>
                     <th className="text-center py-4 px-4 font-semibold">Enterprise</th>
@@ -211,11 +235,13 @@ const Pricing = () => {
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">ESG Tracking Dashboard</td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">Report Exports (PDF/Excel)</td>
+                    <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
@@ -223,11 +249,13 @@ const Pricing = () => {
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">Advanced Analytics</td>
                     <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
+                    <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">API Access</td>
+                    <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
@@ -235,17 +263,20 @@ const Pricing = () => {
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">Priority Support</td>
                     <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
+                    <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-4 px-4">Custom Integrations</td>
                     <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
+                    <td className="text-center py-4 px-4"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4 bg-primary/5"><X className="w-5 h-5 text-muted-foreground mx-auto" /></td>
                     <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                   </tr>
                   <tr>
                     <td className="py-4 px-4">Max Users</td>
+                    <td className="text-center py-4 px-4">Demo Only</td>
                     <td className="text-center py-4 px-4">5</td>
                     <td className="text-center py-4 px-4 bg-primary/5">20</td>
                     <td className="text-center py-4 px-4">Unlimited</td>

@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
-import { Leaf, TrendingUp, Users, Shield, FileText, CheckCircle2, AlertCircle, AlertTriangle } from "lucide-react";
+import { Leaf, TrendingUp, Users, Shield, FileText, CheckCircle2, AlertCircle, AlertTriangle, Download } from "lucide-react";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 // SEBI BRSR-aligned validation schemas
@@ -264,33 +264,338 @@ const Demo = () => {
            Object.values(esgData.governance).some(v => v && v.toString().trim() !== "");
   };
 
+  // Download report function
+  const downloadReport = () => {
+    if (!hasAnyData()) {
+      return;
+    }
+
+    const reportDate = new Date().toLocaleDateString('en-IN', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+
+    const getScoreColorHex = (score: number) => {
+      if (score >= 80) return "#10b981";
+      if (score >= 60) return "#eab308";
+      if (score >= 40) return "#f97316";
+      return "#ef4444";
+    };
+
+    // Create HTML content for the report
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ESG Report - EcoTrack India</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      border-bottom: 2px solid #10b981;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      color: #10b981;
+      margin: 0;
+      font-size: 28px;
+    }
+    .header p {
+      color: #666;
+      margin: 5px 0 0 0;
+    }
+    .score-section {
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .score-item {
+      text-align: center;
+      padding: 15px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+    .score-value {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .data-section {
+      margin: 30px 0;
+    }
+    .data-section h2 {
+      color: #1f2937;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .data-item {
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 4px;
+      border-left: 3px solid #10b981;
+    }
+    .data-label {
+      font-weight: 600;
+      color: #4b5563;
+      font-size: 14px;
+    }
+    .data-value {
+      color: #1f2937;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+    }
+    @media print {
+      body { padding: 10px; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      .data-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ESG Report - SEBI BRSR Compliant</h1>
+    <p>Generated on ${reportDate} | EcoTrack India</p>
+  </div>
+
+  <div class="score-section">
+    <h2 style="margin-top: 0;">Overall ESG Score</h2>
+      <div style="text-align: center; margin: 20px 0;">
+        <div class="score-value" style="color: ${getScoreColorHex(scores.overall)}">
+          ${scores.overall}/100
+        </div>
+        <p style="color: #6b7280; margin: 5px 0;">${getScoreLabel(scores.overall)}</p>
+      </div>
+    <div class="score-grid">
+      <div class="score-item">
+        <div style="color: #6b7280; font-size: 14px;">Environment</div>
+        <div class="score-value" style="color: #10b981;">${scores.environment}</div>
+        <div style="color: #6b7280; font-size: 12px;">${getScoreLabel(scores.environment)}</div>
+      </div>
+      <div class="score-item">
+        <div style="color: #6b7280; font-size: 14px;">Social</div>
+        <div class="score-value" style="color: #3b82f6;">${scores.social}</div>
+        <div style="color: #6b7280; font-size: 12px;">${getScoreLabel(scores.social)}</div>
+      </div>
+      <div class="score-item">
+        <div style="color: #6b7280; font-size: 14px;">Governance</div>
+        <div class="score-value" style="color: #8b5cf6;">${scores.governance}</div>
+        <div style="color: #6b7280; font-size: 12px;">${getScoreLabel(scores.governance)}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h2>Environmental Data</h2>
+    <div class="data-grid">
+      ${esgData.environment.energyConsumption ? `
+      <div class="data-item">
+        <div class="data-label">Energy Consumption</div>
+        <div class="data-value">${esgData.environment.energyConsumption} kWh/year</div>
+      </div>` : ''}
+      ${esgData.environment.renewableEnergy ? `
+      <div class="data-item">
+        <div class="data-label">Renewable Energy</div>
+        <div class="data-value">${esgData.environment.renewableEnergy}%</div>
+      </div>` : ''}
+      ${esgData.environment.waterConsumption ? `
+      <div class="data-item">
+        <div class="data-label">Water Consumption</div>
+        <div class="data-value">${esgData.environment.waterConsumption} L/year</div>
+      </div>` : ''}
+      ${esgData.environment.wasteGenerated ? `
+      <div class="data-item">
+        <div class="data-label">Waste Generated</div>
+        <div class="data-value">${esgData.environment.wasteGenerated} kg/year</div>
+      </div>` : ''}
+      ${esgData.environment.wasteRecycled ? `
+      <div class="data-item">
+        <div class="data-label">Waste Recycled</div>
+        <div class="data-value">${esgData.environment.wasteRecycled}%</div>
+      </div>` : ''}
+      ${esgData.environment.scope1Emissions ? `
+      <div class="data-item">
+        <div class="data-label">Scope 1 Emissions</div>
+        <div class="data-value">${esgData.environment.scope1Emissions} tCO2e/year</div>
+      </div>` : ''}
+      ${esgData.environment.scope2Emissions ? `
+      <div class="data-item">
+        <div class="data-label">Scope 2 Emissions</div>
+        <div class="data-value">${esgData.environment.scope2Emissions} tCO2e/year</div>
+      </div>` : ''}
+      ${esgData.environment.airEmissions ? `
+      <div class="data-item">
+        <div class="data-label">Air Emissions</div>
+        <div class="data-value">${esgData.environment.airEmissions} kg/year</div>
+      </div>` : ''}
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h2>Social Data</h2>
+    <div class="data-grid">
+      ${esgData.social.totalEmployees ? `
+      <div class="data-item">
+        <div class="data-label">Total Employees</div>
+        <div class="data-value">${esgData.social.totalEmployees}</div>
+      </div>` : ''}
+      ${esgData.social.womenEmployees ? `
+      <div class="data-item">
+        <div class="data-label">Women Employees</div>
+        <div class="data-value">${esgData.social.womenEmployees}%</div>
+      </div>` : ''}
+      ${esgData.social.employeeTurnover ? `
+      <div class="data-item">
+        <div class="data-label">Employee Turnover</div>
+        <div class="data-value">${esgData.social.employeeTurnover}%</div>
+      </div>` : ''}
+      ${esgData.social.trainingHours ? `
+      <div class="data-item">
+        <div class="data-label">Training Hours</div>
+        <div class="data-value">${esgData.social.trainingHours} hrs/employee/year</div>
+      </div>` : ''}
+      ${esgData.social.safetyIncidents ? `
+      <div class="data-item">
+        <div class="data-label">Safety Incidents</div>
+        <div class="data-value">${esgData.social.safetyIncidents} per year</div>
+      </div>` : ''}
+      ${esgData.social.fatalities ? `
+      <div class="data-item">
+        <div class="data-label">Fatalities</div>
+        <div class="data-value">${esgData.social.fatalities} per year</div>
+      </div>` : ''}
+      ${esgData.social.communityInvestment ? `
+      <div class="data-item">
+        <div class="data-label">Community Investment</div>
+        <div class="data-value">₹${Number(esgData.social.communityInvestment).toLocaleString()}</div>
+      </div>` : ''}
+      ${esgData.social.supplyChainAudits ? `
+      <div class="data-item">
+        <div class="data-label">Supply Chain Audits</div>
+        <div class="data-value">${esgData.social.supplyChainAudits}</div>
+      </div>` : ''}
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h2>Governance Data</h2>
+    <div class="data-grid">
+      ${esgData.governance.boardMeetings ? `
+      <div class="data-item">
+        <div class="data-label">Board Meetings</div>
+        <div class="data-value">${esgData.governance.boardMeetings} per year</div>
+      </div>` : ''}
+      ${esgData.governance.independentDirectors ? `
+      <div class="data-item">
+        <div class="data-label">Independent Directors</div>
+        <div class="data-value">${esgData.governance.independentDirectors}%</div>
+      </div>` : ''}
+      ${esgData.governance.auditCommitteeMeetings ? `
+      <div class="data-item">
+        <div class="data-label">Audit Committee Meetings</div>
+        <div class="data-value">${esgData.governance.auditCommitteeMeetings} per year</div>
+      </div>` : ''}
+      ${esgData.governance.codeOfConduct ? `
+      <div class="data-item">
+        <div class="data-label">Code of Conduct</div>
+        <div class="data-value">${esgData.governance.codeOfConduct}</div>
+      </div>` : ''}
+      ${esgData.governance.whistleblowerPolicy ? `
+      <div class="data-item">
+        <div class="data-label">Whistleblower Policy</div>
+        <div class="data-value">${esgData.governance.whistleblowerPolicy}</div>
+      </div>` : ''}
+      ${esgData.governance.antiCorruptionPolicy ? `
+      <div class="data-item">
+        <div class="data-label">Anti-Corruption Policy</div>
+        <div class="data-value">${esgData.governance.antiCorruptionPolicy}</div>
+      </div>` : ''}
+      ${esgData.governance.dataPrivacyCompliance ? `
+      <div class="data-item">
+        <div class="data-label">Data Privacy Compliance</div>
+        <div class="data-value">${esgData.governance.dataPrivacyCompliance}</div>
+      </div>` : ''}
+      ${esgData.governance.riskManagementFramework ? `
+      <div class="data-item">
+        <div class="data-label">Risk Management Framework</div>
+        <div class="data-value">${esgData.governance.riskManagementFramework}</div>
+      </div>` : ''}
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>This report is generated by EcoTrack India - SEBI BRSR Compliant ESG Reporting Platform</p>
+    <p>For more information, visit www.ecotrackindia.com</p>
+  </div>
+</body>
+</html>
+    `;
+
+    // Create blob and download
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `ESG_Report_${new Date().toISOString().split('T')[0]}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-b from-background to-section-alt">
+        <section className="pt-20 pb-8 md:pt-24 md:pb-12 border-b">
           <div className="container-width">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-eco-green-light border border-accent/20 mb-6">
-                <Leaf className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium text-accent">SEBI BRSR-Aligned Demo</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Experience <span className="text-primary">EcoTrack</span> Platform
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-3xl md:text-4xl font-bold mb-3">
+                ESG Reporting Demo
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Enter your ESG data as per SEBI BRSR requirements and see how EcoTrack generates comprehensive, compliance-ready reports with scores and visualizations.
+              <p className="text-base text-muted-foreground">
+                Enter your ESG data as per SEBI BRSR requirements. Generate compliance-ready reports with automated scoring.
               </p>
             </div>
           </div>
         </section>
 
         {/* Demo Sections */}
-        <section className="section-padding bg-background">
+        <section className="py-8 bg-background">
           <div className="container-width">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-4 mb-6">
                 <TabsTrigger value="environment" className="flex items-center gap-2">
                   <Leaf className="w-4 h-4" />
                   Environment
@@ -902,42 +1207,50 @@ const Demo = () => {
                 ) : (
                   <>
                     {/* Overall Score Card */}
-                    <Card className="border-2 border-primary">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <TrendingUp className="w-5 h-5 text-primary" />
-                          Overall ESG Score (SEBI BRSR Compliant)
-                        </CardTitle>
-                        <CardDescription>
-                          Your comprehensive ESG performance rating based on SEBI BRSR framework
-                        </CardDescription>
+                    <Card className="border">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <CardTitle className="text-xl">Overall ESG Score</CardTitle>
+                            <CardDescription className="mt-1">SEBI BRSR Compliant Rating</CardDescription>
+                          </div>
+                          <Button 
+                            onClick={downloadReport}
+                            variant="outline"
+                            size="sm"
+                            className="gap-2"
+                          >
+                            <Download className="w-4 h-4" />
+                            Download Report
+                          </Button>
+                        </div>
                       </CardHeader>
                       <CardContent>
-                        <div className="flex flex-col items-center justify-center py-8">
-                          <div className={`text-6xl font-bold mb-2 ${getScoreColor(scores.overall)}`}>
+                        <div className="flex flex-col items-center justify-center py-6">
+                          <div className={`text-5xl font-bold mb-1 ${getScoreColor(scores.overall)}`}>
                             {scores.overall}
                           </div>
-                          <div className="text-2xl text-muted-foreground mb-4">/ 100</div>
-                          <div className={`text-lg font-semibold ${getScoreColor(scores.overall)}`}>
+                          <div className="text-lg text-muted-foreground mb-2">/ 100</div>
+                          <div className={`text-base font-medium ${getScoreColor(scores.overall)}`}>
                             {getScoreLabel(scores.overall)}
                           </div>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t">
                           <div className="text-center">
-                            <div className="text-sm text-muted-foreground mb-1">Environment</div>
-                            <div className={`text-2xl font-bold ${getScoreColor(scores.environment)}`}>
+                            <div className="text-xs text-muted-foreground mb-1">Environment</div>
+                            <div className={`text-xl font-bold ${getScoreColor(scores.environment)}`}>
                               {scores.environment}
                             </div>
                           </div>
                           <div className="text-center">
-                            <div className="text-sm text-muted-foreground mb-1">Social</div>
-                            <div className={`text-2xl font-bold ${getScoreColor(scores.social)}`}>
+                            <div className="text-xs text-muted-foreground mb-1">Social</div>
+                            <div className={`text-xl font-bold ${getScoreColor(scores.social)}`}>
                               {scores.social}
                             </div>
                           </div>
                           <div className="text-center">
-                            <div className="text-sm text-muted-foreground mb-1">Governance</div>
-                            <div className={`text-2xl font-bold ${getScoreColor(scores.governance)}`}>
+                            <div className="text-xs text-muted-foreground mb-1">Governance</div>
+                            <div className={`text-xl font-bold ${getScoreColor(scores.governance)}`}>
                               {scores.governance}
                             </div>
                           </div>
@@ -946,12 +1259,12 @@ const Demo = () => {
                     </Card>
 
                     {/* Charts */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                       {/* ESG Breakdown Pie Chart */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>ESG Score Breakdown</CardTitle>
-                          <CardDescription>Distribution across E, S, and G pillars</CardDescription>
+                      <Card className="border">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg">ESG Score Breakdown</CardTitle>
+                          <CardDescription className="text-xs">Distribution across E, S, and G pillars</CardDescription>
                         </CardHeader>
                         <CardContent>
                           <ChartContainer
@@ -960,7 +1273,7 @@ const Demo = () => {
                               social: { label: "Social", color: "#3b82f6" },
                               governance: { label: "Governance", color: "#8b5cf6" },
                             }}
-                            className="h-[300px]"
+                            className="h-[250px]"
                           >
                             <PieChart>
                               <Pie
@@ -969,7 +1282,7 @@ const Demo = () => {
                                 cy="50%"
                                 labelLine={false}
                                 label={({ name, value }) => `${name}: ${value}`}
-                                outerRadius={80}
+                                outerRadius={70}
                                 fill="#8884d8"
                                 dataKey="value"
                               >
@@ -984,24 +1297,24 @@ const Demo = () => {
                       </Card>
 
                       {/* Score Comparison Bar Chart */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>Pillar Comparison</CardTitle>
-                          <CardDescription>Score comparison across ESG pillars</CardDescription>
+                      <Card className="border">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg">Pillar Comparison</CardTitle>
+                          <CardDescription className="text-xs">Score comparison across ESG pillars</CardDescription>
                         </CardHeader>
                         <CardContent>
                           <ChartContainer
                             config={{
                               score: { label: "Score", color: "#3b82f6" },
                             }}
-                            className="h-[300px]"
+                            className="h-[250px]"
                           >
                             <BarChart data={scoreComparisonData}>
                               <CartesianGrid strokeDasharray="3 3" />
                               <XAxis dataKey="category" />
                               <YAxis domain={[0, 100]} />
                               <ChartTooltip content={<ChartTooltipContent />} />
-                              <Bar dataKey="score" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+                              <Bar dataKey="score" fill="#3b82f6" radius={[4, 4, 0, 0]} />
                             </BarChart>
                           </ChartContainer>
                         </CardContent>
@@ -1009,13 +1322,13 @@ const Demo = () => {
                     </div>
 
                     {/* Data Summary */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Data Summary (SEBI BRSR Parameters)</CardTitle>
-                        <CardDescription>Overview of entered ESG metrics as per SEBI BRSR framework</CardDescription>
+                    <Card className="border">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-lg">Data Summary</CardTitle>
+                        <CardDescription className="text-xs">SEBI BRSR Parameters Overview</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div>
                             <h4 className="font-semibold mb-3 flex items-center gap-2">
                               <Leaf className="w-4 h-4 text-green-600" />
@@ -1117,22 +1430,18 @@ const Demo = () => {
                     </Card>
 
                     {/* CTA */}
-                    <Card className="bg-gradient-to-r from-primary to-accent text-primary-foreground">
-                      <CardContent className="py-8 text-center">
-                        <h3 className="text-2xl font-bold mb-2">Ready for the Full Experience?</h3>
-                        <p className="text-primary-foreground/90 mb-6">
-                          This is just a preview. Get the complete EcoTrack platform with SEBI BRSR-compliant reporting, 
+                    <Card className="border bg-muted/30">
+                      <CardContent className="py-6 text-center">
+                        <h3 className="text-lg font-semibold mb-2">Ready for Full Platform Access?</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          This is a demo preview. Get complete EcoTrack platform with SEBI BRSR-compliant reporting, 
                           advanced analytics, unlimited reports, and compliance tracking.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                          <Button variant="secondary" size="lg" asChild>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <Button variant="outline" size="sm" asChild>
                             <a href="/pricing">View Pricing</a>
                           </Button>
-                          <Button 
-                            size="lg" 
-                            className="bg-white text-primary hover:bg-white/90 border-2 border-white font-semibold shadow-lg" 
-                            asChild
-                          >
+                          <Button size="sm" asChild>
                             <a href="/contact">Contact Sales</a>
                           </Button>
                         </div>
