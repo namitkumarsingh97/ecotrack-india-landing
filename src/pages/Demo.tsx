@@ -178,54 +178,320 @@ const Demo = () => {
     setEsgData((prev) => ({ ...prev, governance: data }));
   };
 
-  // Calculate ESG Scores based on SEBI BRSR requirements
+  // Calculate ESG Scores based on actual values and benchmarks
   const calculateScores = () => {
     const env = esgData.environment;
     const soc = esgData.social;
     const gov = esgData.governance;
 
-    // Environment Score (0-100) - SEBI BRSR aligned
+    // Environment Score (0-100) - Based on actual performance
     let envScore = 0;
-    const envMax = 100;
-    if (env.energyConsumption && Number(env.energyConsumption) > 0) envScore += 12.5;
-    if (env.renewableEnergy && Number(env.renewableEnergy) > 0) envScore += 12.5;
-    if (env.waterConsumption && Number(env.waterConsumption) > 0) envScore += 12.5;
-    if (env.wasteGenerated && Number(env.wasteGenerated) > 0) envScore += 12.5;
-    if (env.wasteRecycled && Number(env.wasteRecycled) > 0) envScore += 12.5;
-    if (env.scope1Emissions && Number(env.scope1Emissions) > 0) envScore += 12.5;
-    if (env.scope2Emissions && Number(env.scope2Emissions) > 0) envScore += 12.5;
-    if (env.airEmissions && env.airEmissions.trim() !== "") envScore += 12.5;
+    let envFactors = 0;
 
-    // Social Score (0-100) - SEBI BRSR aligned
+    // Renewable Energy % (Higher is better, 0-100%)
+    if (env.renewableEnergy && env.renewableEnergy.trim() !== "") {
+      const renewable = Number(env.renewableEnergy);
+      if (!isNaN(renewable) && renewable >= 0 && renewable <= 100) {
+        envScore += renewable; // Direct score: 50% renewable = 50 points
+        envFactors++;
+      }
+    }
+
+    // Waste Recycled % (Higher is better, 0-100%)
+    if (env.wasteRecycled && env.wasteRecycled.trim() !== "") {
+      const recycled = Number(env.wasteRecycled);
+      if (!isNaN(recycled) && recycled >= 0 && recycled <= 100) {
+        envScore += recycled; // Direct score: 80% recycled = 80 points
+        envFactors++;
+      }
+    }
+
+    // Energy Consumption (Lower is better - normalized against benchmark)
+    // Benchmark: 50,000 kWh/year for small business, 500,000 for medium, 5M for large
+    if (env.energyConsumption && env.energyConsumption.trim() !== "") {
+      const energy = Number(env.energyConsumption);
+      if (!isNaN(energy) && energy > 0) {
+        // Assume medium business benchmark of 500,000 kWh/year
+        // Score decreases as consumption increases
+        const benchmark = 500000;
+        const score = Math.max(0, 100 - (energy / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Water Consumption (Lower is better)
+    if (env.waterConsumption && env.waterConsumption.trim() !== "") {
+      const water = Number(env.waterConsumption);
+      if (!isNaN(water) && water > 0) {
+        // Benchmark: 100,000 L/year for medium business
+        const benchmark = 100000;
+        const score = Math.max(0, 100 - (water / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Waste Generated (Lower is better)
+    if (env.wasteGenerated && env.wasteGenerated.trim() !== "") {
+      const waste = Number(env.wasteGenerated);
+      if (!isNaN(waste) && waste > 0) {
+        // Benchmark: 5,000 kg/year for medium business
+        const benchmark = 5000;
+        const score = Math.max(0, 100 - (waste / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Scope 1 Emissions (Lower is better)
+    if (env.scope1Emissions && env.scope1Emissions.trim() !== "") {
+      const scope1 = Number(env.scope1Emissions);
+      if (!isNaN(scope1) && scope1 >= 0) {
+        // Benchmark: 100 tCO2e/year for medium business
+        const benchmark = 100;
+        const score = Math.max(0, 100 - (scope1 / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Scope 2 Emissions (Lower is better)
+    if (env.scope2Emissions && env.scope2Emissions.trim() !== "") {
+      const scope2 = Number(env.scope2Emissions);
+      if (!isNaN(scope2) && scope2 >= 0) {
+        // Benchmark: 50 tCO2e/year for medium business
+        const benchmark = 50;
+        const score = Math.max(0, 100 - (scope2 / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Air Emissions (Lower is better, optional)
+    if (env.airEmissions && env.airEmissions.trim() !== "") {
+      const air = Number(env.airEmissions);
+      if (!isNaN(air) && air >= 0) {
+        // Benchmark: 1,000 kg/year
+        const benchmark = 1000;
+        const score = Math.max(0, 100 - (air / benchmark) * 50); // Max 50 points
+        envScore += score;
+        envFactors++;
+      }
+    }
+
+    // Average the environment score
+    const finalEnvScore = envFactors > 0 ? envScore / envFactors : 0;
+
+    // Social Score (0-100) - Based on actual performance
     let socScore = 0;
-    if (soc.totalEmployees && Number(soc.totalEmployees) > 0) socScore += 12.5;
-    if (soc.womenEmployees && Number(soc.womenEmployees) > 0) socScore += 12.5;
-    if (soc.employeeTurnover && Number(soc.employeeTurnover) >= 0) socScore += 12.5;
-    if (soc.trainingHours && Number(soc.trainingHours) > 0) socScore += 12.5;
-    if (soc.safetyIncidents && Number(soc.safetyIncidents) >= 0) socScore += 12.5;
-    if (soc.fatalities && Number(soc.fatalities) >= 0) socScore += 12.5;
-    if (soc.communityInvestment && Number(soc.communityInvestment) > 0) socScore += 12.5;
-    if (soc.supplyChainAudits && soc.supplyChainAudits.trim() !== "") socScore += 12.5;
+    let socFactors = 0;
 
-    // Governance Score (0-100) - SEBI BRSR aligned
+    // Women Employees % (30-50% is ideal)
+    if (soc.womenEmployees && soc.womenEmployees.trim() !== "") {
+      const women = Number(soc.womenEmployees);
+      if (!isNaN(women) && women >= 0 && women <= 100) {
+        // Ideal range: 30-50%, score decreases outside this range
+        let score = 0;
+        if (women >= 30 && women <= 50) {
+          score = 100; // Perfect
+        } else if (women >= 20 && women < 30) {
+          score = 70 + ((women - 20) / 10) * 30; // 20-30%: 70-100
+        } else if (women > 50 && women <= 60) {
+          score = 100 - ((women - 50) / 10) * 30; // 50-60%: 100-70
+        } else if (women >= 10 && women < 20) {
+          score = 40 + ((women - 10) / 10) * 30; // 10-20%: 40-70
+        } else if (women > 60) {
+          score = Math.max(0, 70 - ((women - 60) / 10) * 20); // >60%: decreasing
+        } else {
+          score = (women / 10) * 40; // <10%: 0-40
+        }
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Employee Turnover (Lower is better, 0-10% is excellent, >20% is poor)
+    if (soc.employeeTurnover && soc.employeeTurnover.trim() !== "") {
+      const turnover = Number(soc.employeeTurnover);
+      if (!isNaN(turnover) && turnover >= 0 && turnover <= 100) {
+        let score = 0;
+        if (turnover <= 5) {
+          score = 100; // Excellent
+        } else if (turnover <= 10) {
+          score = 100 - ((turnover - 5) / 5) * 20; // 5-10%: 100-80
+        } else if (turnover <= 15) {
+          score = 80 - ((turnover - 10) / 5) * 30; // 10-15%: 80-50
+        } else if (turnover <= 20) {
+          score = 50 - ((turnover - 15) / 5) * 30; // 15-20%: 50-20
+        } else {
+          score = Math.max(0, 20 - ((turnover - 20) / 10) * 20); // >20%: 20-0
+        }
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Training Hours (Higher is better, 20+ hours is good)
+    if (soc.trainingHours && soc.trainingHours.trim() !== "") {
+      const training = Number(soc.trainingHours);
+      if (!isNaN(training) && training >= 0) {
+        let score = 0;
+        if (training >= 40) {
+          score = 100; // Excellent
+        } else if (training >= 20) {
+          score = 70 + ((training - 20) / 20) * 30; // 20-40: 70-100
+        } else if (training >= 10) {
+          score = 40 + ((training - 10) / 10) * 30; // 10-20: 40-70
+        } else {
+          score = (training / 10) * 40; // 0-10: 0-40
+        }
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Safety Incidents (Lower is better, 0 is perfect)
+    if (soc.safetyIncidents && soc.safetyIncidents.trim() !== "") {
+      const incidents = Number(soc.safetyIncidents);
+      if (!isNaN(incidents) && incidents >= 0) {
+        let score = 0;
+        if (incidents === 0) {
+          score = 100; // Perfect
+        } else if (incidents <= 2) {
+          score = 100 - (incidents * 15); // 1-2: 85-70
+        } else if (incidents <= 5) {
+          score = 70 - ((incidents - 2) * 10); // 3-5: 60-40
+        } else {
+          score = Math.max(0, 40 - ((incidents - 5) * 8)); // >5: decreasing
+        }
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Fatalities (0 is required for good score)
+    if (soc.fatalities && soc.fatalities.trim() !== "") {
+      const fatalities = Number(soc.fatalities);
+      if (!isNaN(fatalities) && fatalities >= 0) {
+        const score = fatalities === 0 ? 100 : Math.max(0, 100 - (fatalities * 50)); // 0 = 100, 1 = 50, 2+ = 0
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Community Investment (Higher is better, relative to company size)
+    if (soc.communityInvestment && soc.communityInvestment.trim() !== "") {
+      const investment = Number(soc.communityInvestment);
+      if (!isNaN(investment) && investment >= 0) {
+        // Benchmark: ₹500,000/year for medium business
+        const benchmark = 500000;
+        const score = Math.min(100, (investment / benchmark) * 100); // Max 100 points
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Supply Chain Audits (Higher is better, optional)
+    if (soc.supplyChainAudits && soc.supplyChainAudits.trim() !== "") {
+      const audits = Number(soc.supplyChainAudits);
+      if (!isNaN(audits) && audits >= 0) {
+        // Benchmark: 10 audits/year
+        const benchmark = 10;
+        const score = Math.min(100, (audits / benchmark) * 100); // Max 100 points
+        socScore += score;
+        socFactors++;
+      }
+    }
+
+    // Average the social score
+    const finalSocScore = socFactors > 0 ? socScore / socFactors : 0;
+
+    // Governance Score (0-100) - Based on actual values
     let govScore = 0;
-    if (gov.boardMeetings && Number(gov.boardMeetings) > 0) govScore += 12.5;
-    if (gov.independentDirectors && Number(gov.independentDirectors) > 0) govScore += 12.5;
-    if (gov.auditCommitteeMeetings && Number(gov.auditCommitteeMeetings) > 0) govScore += 12.5;
-    if (gov.codeOfConduct && gov.codeOfConduct.toLowerCase().includes("yes")) govScore += 12.5;
-    if (gov.whistleblowerPolicy && gov.whistleblowerPolicy.toLowerCase().includes("yes")) govScore += 12.5;
-    if (gov.antiCorruptionPolicy && gov.antiCorruptionPolicy.toLowerCase().includes("yes")) govScore += 12.5;
-    if (gov.dataPrivacyCompliance && gov.dataPrivacyCompliance.toLowerCase().includes("yes")) govScore += 12.5;
-    if (gov.riskManagementFramework && gov.riskManagementFramework.toLowerCase().includes("yes")) govScore += 12.5;
+    let govFactors = 0;
+
+    // Board Meetings (4-12 per year is good)
+    if (gov.boardMeetings && gov.boardMeetings.trim() !== "") {
+      const meetings = Number(gov.boardMeetings);
+      if (!isNaN(meetings) && meetings > 0) {
+        let score = 0;
+        if (meetings >= 4 && meetings <= 12) {
+          score = 100; // Ideal range
+        } else if (meetings < 4) {
+          score = (meetings / 4) * 100; // Less than 4: proportional
+        } else {
+          score = Math.max(70, 100 - ((meetings - 12) / 4) * 10); // >12: slight decrease
+        }
+        govScore += score;
+        govFactors++;
+      }
+    }
+
+    // Independent Directors % (30-50% is ideal)
+    if (gov.independentDirectors && gov.independentDirectors.trim() !== "") {
+      const independent = Number(gov.independentDirectors);
+      if (!isNaN(independent) && independent >= 0 && independent <= 100) {
+        let score = 0;
+        if (independent >= 30 && independent <= 50) {
+          score = 100; // Ideal
+        } else if (independent >= 20 && independent < 30) {
+          score = 70 + ((independent - 20) / 10) * 30; // 20-30%: 70-100
+        } else if (independent > 50 && independent <= 60) {
+          score = 100 - ((independent - 50) / 10) * 20; // 50-60%: 100-80
+        } else if (independent >= 10 && independent < 20) {
+          score = 40 + ((independent - 10) / 10) * 30; // 10-20%: 40-70
+        } else {
+          score = (independent / 10) * 40; // <10%: 0-40
+        }
+        govScore += score;
+        govFactors++;
+      }
+    }
+
+    // Audit Committee Meetings (4+ per year is good)
+    if (gov.auditCommitteeMeetings && gov.auditCommitteeMeetings.trim() !== "") {
+      const meetings = Number(gov.auditCommitteeMeetings);
+      if (!isNaN(meetings) && meetings > 0) {
+        let score = 0;
+        if (meetings >= 4) {
+          score = 100; // Good
+        } else {
+          score = (meetings / 4) * 100; // Less than 4: proportional
+        }
+        govScore += score;
+        govFactors++;
+      }
+    }
+
+    // Policy checks (Yes = 100, No = 0)
+    const policyFields = [
+      { value: gov.codeOfConduct, name: "Code of Conduct" },
+      { value: gov.whistleblowerPolicy, name: "Whistleblower Policy" },
+      { value: gov.antiCorruptionPolicy, name: "Anti-Corruption Policy" },
+      { value: gov.dataPrivacyCompliance, name: "Data Privacy Compliance" },
+      { value: gov.riskManagementFramework, name: "Risk Management Framework" },
+    ];
+
+    policyFields.forEach((field) => {
+      if (field.value && field.value.trim() !== "") {
+        const isYes = field.value.toLowerCase().includes("yes");
+        govScore += isYes ? 100 : 0;
+        govFactors++;
+      }
+    });
+
+    // Average the governance score
+    const finalGovScore = govFactors > 0 ? govScore / govFactors : 0;
 
     // Overall ESG Score (weighted average as per SEBI)
-    const overallScore = (envScore * 0.4 + socScore * 0.3 + govScore * 0.3);
+    const overallScore = (finalEnvScore * 0.4 + finalSocScore * 0.3 + finalGovScore * 0.3);
 
     return {
-      environment: Math.round(envScore),
-      social: Math.round(socScore),
-      governance: Math.round(govScore),
-      overall: Math.round(overallScore),
+      environment: Math.round(Math.min(100, Math.max(0, finalEnvScore))),
+      social: Math.round(Math.min(100, Math.max(0, finalSocScore))),
+      governance: Math.round(Math.min(100, Math.max(0, finalGovScore))),
+      overall: Math.round(Math.min(100, Math.max(0, overallScore))),
     };
   };
 
