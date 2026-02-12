@@ -62,7 +62,7 @@ const Careers = () => {
     {
       title: "Business Development Manager",
       department: "Sales",
-      location: "Gurugram / Remote",
+      location: "Mountain View, CA / Remote",
       type: "Part-time / Freelance",
       description: "We're looking for a dynamic Business Development Manager to help us grow our customer base and bring ESG compliance to more Indian SMBs. This is a part-time/freelance role perfect for someone who wants to build something meaningful while maintaining flexibility.",
       responsibilities: [
@@ -86,7 +86,7 @@ const Careers = () => {
     {
       title: "Customer Success Specialist",
       department: "Customer Success",
-      location: "Gurugram / Remote",
+      location: "Mountain View, CA / Remote",
       type: "Part-time / Freelance",
       description: "Help our customers succeed with ESG compliance. You'll be the bridge between our product and our customers, ensuring they get maximum value. This is a part-time/freelance role with flexible hours.",
       responsibilities: [
@@ -110,7 +110,7 @@ const Careers = () => {
     {
       title: "Marketing & Content Specialist",
       department: "Marketing",
-      location: "Gurugram / Remote",
+      location: "Mountain View, CA / Remote",
       type: "Part-time / Freelance",
       description: "Build our brand and generate leads through content marketing, SEO, and digital marketing. Help Indian SMBs discover EcoTrack. This is a part-time/freelance role perfect for content creators and marketers who want flexibility.",
       responsibilities: [

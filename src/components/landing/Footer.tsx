@@ -134,12 +134,12 @@ const Footer = () => {
                   <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-primary-foreground">
-                      Gurugram
+                      Mountain View
                     </div>
                     <div className="text-sm">
-                      Sector 56, Gurugram,
+                      Mountain View Ave,
                       <br />
-                      Haryana, 122011
+                      Mountain View, California, US
                     </div>
                   </div>
                 </div>

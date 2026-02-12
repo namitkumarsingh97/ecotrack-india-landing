@@ -121,7 +121,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Office Address",
-      content: "Sector 56, Gurugram, Haryana, 122011",
+      content: "Mountain View Ave, Mountain View, California, US",
       link: null,
       description: "Corporate HQ Office"
     },
@@ -134,8 +134,8 @@ const Contact = () => {
     {
       icon: Clock,
       title: "Business Hours",
-      content: "Mon - Fri, 9 AM - 6 PM IST",
-      description: "Indian Standard Time"
+      content: "Mon - Fri, 9 AM - 6 PM PST",
+      description: "Pacific Standard Time"
     }
   ];
 
@@ -311,7 +311,7 @@ const Contact = () => {
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Find Us</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Visit us at our office locations across India
+                Visit us at our headquarters office
               </p>
             </div>
 
@@ -323,13 +323,13 @@ const Contact = () => {
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold mb-2">Gurugram</h3>
+                      <h3 className="text-xl font-semibold mb-2">Mountain View</h3>
                       <p className="text-muted-foreground text-sm mb-3">
                         Corporate HQ Office
                       </p>
                       <p className="text-muted-foreground text-sm">
-                        Sector 56, Gurugram,<br />
-                        Haryana, 122011
+                        Mountain View Ave,<br />
+                        Mountain View, California, US
                       </p>
                     </div>
                   </div>
